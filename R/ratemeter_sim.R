@@ -15,14 +15,13 @@
 #'   Units = seconds. Default set to 9.5, which provides 90% equilibrium in 22
 #'   seconds. If the user does not know the time constant, but has an estimate
 #'   of equilibrium in some time, use tau.estimate.
+#' @family rad_measurements
 #' @param trials Number of seconds to run simulation. Default = 600.
 #' @param log_opt If logarithmic scale is needed, set to "y". If set to anything
 #'   but blank (default), scale will be logarithmic.
 #' @return Plot of simulated meter reading every second..
 #' @examples
 #' rate_meter_sim(cpm_equilibrium = 270, meter_scale_increments = seq(100, 1000, 20))
-#' rate_meter_sim(cpm_equilibrium = 500, log = "y",
-#'                meter_scale_increments = c(seq(10, 100, 10), seq(100, 1000, 100)))
 #' rate_meter_sim(cpm_equilibrium = 2.7e5, meter_scale_increments = seq(2e5, 1e6, 2e4))
 #' rate_meter_sim(450, seq(20, 1000, 20), trials = 1200, tau = 24.8534)
 #' @export
