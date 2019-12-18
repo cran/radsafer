@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Introduction to radsafer</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to radsafer</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(radsafer)</span></code></pre></div>
+<p>The radsafer package was developed with these goals:</p>
+<ul>
+<li><p>Provide functions that are commonly used in radiation safety</p></li>
+<li><p>Provide easy access to data provided in the RadData package</p></li>
+<li><p>Share some less commonly-used functions that may be of significant value to workers in instrumentation and modeling</p></li>
+</ul>
+<p>Related functions are identified as members of these families:</p>
+<ul>
+<li><p>decay corrections</p></li>
+<li><p>radionuclides</p></li>
+<li><p>rad measurements</p></li>
+<li><p>mcnp tools</p></li>
+</ul>
+<p>This framework makes it a little easier to find the function you want - the help file for each function lists related functions.</p>
+<div id="decay-correction-functions" class="section level3">
+<h3>Decay Correction Functions</h3>
+<p>Radsafer includes several functions to manage radioactive decay corrections:</p>
+<p><strong>dk_correct</strong> provides decay corrected activity or activity-dependent value, such as instrument response rate or dose rate. The computation is made either based on a single radionuclide, or based on user-provided half-life, with time unit. The differential time is either computed based on dates entered or time lapsed based on the time unit.</p>
+<p>Obtain a correction factor for a source to be used today based on a calibration on <code>date1</code>. Allow <code>date2</code> to be the default system date.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">dk_correct</span>(<span class="dt">half_life =</span> <span class="dv">10</span>,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>           <span class="dt">time_unit =</span> <span class="st">&quot;y&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>           <span class="dt">date1 =</span> <span class="st">&quot;2010-01-01&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;  half_life RefValue    RefDate   TargDate  dk_value</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;         10        1 2010-01-01 2019-12-18 0.5013778</span></span></code></pre></div>
+<p>Use this function to correct for the value needed on dates it was used. Let the function obtain the half-life from the <code>RadDecay</code> data. In the example, we have a disk source with an original count rate of 10000 cpm:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">dk_correct</span>(<span class="dt">RN_select =</span> <span class="st">&quot;Sr-90&quot;</span>,</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">date1 =</span> <span class="st">&quot;2005-01-01&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">date2 =</span> <span class="kw">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;2009-10-01&quot;</span>),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">A1 =</span> <span class="dv">10000</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;     RN half_life units decay_mode</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  Sr-90     28.79     y         B-</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; </span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;     RN RefValue    RefDate   TargDate dk_value</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-01-01 9081.895</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-10-01 8919.954</span></span></code></pre></div>
+<p>Reverse decay - find out what readings should have been in the past given today’s reading of 3000</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">dk_correct</span>(<span class="dt">RN_select =</span> <span class="st">&quot;Cs-137&quot;</span>, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">date1 =</span> <span class="st">&quot;2019-01-01&quot;</span>, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="dt">date2 =</span> <span class="kw">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;1999-01-01&quot;</span>), </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="dt">A1 =</span> <span class="dv">3000</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;      RN half_life units decay_mode</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;  Cs-137   30.1671     y         B-</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;      RN RefValue    RefDate   TargDate dk_value</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 2009-01-01 3774.795</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 1999-01-01 4749.991</span></span></code></pre></div>
+<p>Other decay functions answer the following questions:</p>
+<ul>
+<li><p>How long does it take to decay something with a given activity, or how old is a sample if it has decayed from? <strong>dk_time</strong></p></li>
+<li><p>Given a percentage reduction in activity, how many half-lives have passed.<strong>dk_pct_to_num_half_life</strong></p></li>
+<li><p>Given two or more data points, estimate the half-life: <strong>half_life_2pt</strong></p></li>
+</ul>
+</div>
+<div id="rad-measurements-functions" class="section level3">
+<h3>rad measurements functions</h3>
+<p><strong>air_dens_cf</strong> Correct <em>vented ion chamber readings</em> based on difference in air pressure (readings in degrees Celsius and mm Hg):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">air_dens_cf</span>(<span class="dt">T.actual =</span> <span class="dv">30</span>, <span class="dt">P.actual =</span> <span class="dv">760</span>, <span class="dt">T.ref =</span> <span class="dv">20</span>, <span class="dt">P.ref =</span> <span class="dv">760</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; [1] 1.034112</span></span></code></pre></div>
+<p>Let’s try it out combined with the instrument reading:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>rdg &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>(rdg_corrected &lt;-<span class="st"> </span>rdg <span class="op">*</span><span class="st"> </span><span class="kw">air_dens_cf</span>(<span class="dt">T.actual =</span> <span class="dv">30</span>, <span class="dt">P.actual =</span> <span class="dv">760</span>, <span class="dt">T.ref =</span> <span class="dv">20</span>, <span class="dt">P.ref =</span> <span class="dv">760</span>))</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; [1] 103.4112</span></span></code></pre></div>
+<p><strong>neutron_geom_cf</strong></p>
+<p>Correct for <em>geometry</em> when reading a close <em>neutron</em> source. Example: neutron rem detector with a radius of 11 cm and source near surface:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">neutron_geom_cf</span>(<span class="fl">11.1</span>, <span class="dv">11</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; [1] 0.7236467</span></span></code></pre></div>
+<p><strong>disk_to_disk_solid_angle</strong></p>
+<p>Correct for a mismatch between the <em>source calibration</em> of a <em>counting system</em> and the item being measured. A significant factor in the counting efficiency is the solid angle from the source to the detector. You can also check for the impact of an item not being centered with the detector.</p>
+<p>Example: You are counting an air sample with an active collection diameter of 45 mm, your detector has a radius of 25 mm and there is a gap between the two of 5 mm. (The function is based on radius, not diameter so be sure to divide the diameter by two.) The relative solid angle is:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>(as_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">45</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;n&quot;</span>)))</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; [1] 0.045216779 0.002084054</span></span></code></pre></div>
+<p>An optional plot is available in 2D or 3D:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>(as_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">45</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;3d&quot;</span>)))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; [1] 0.047400459 0.002122817</code></pre>
+<p>Continuing the example: the only calibration source you had available with the appropriate isotope has an active diameter of 20 mm. Is this a big deal? Let’s estimate the relative solid angle of the calibration, then take a ratio of the two.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>(cal_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">20</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;n&quot;</span>))</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt;    mean_eff         SEM</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;  0.05372522 0.002256439</span></span></code></pre></div>
+<p>Correct for the mismatch:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>(cf &lt;-<span class="st"> </span>cal_rel_solid_angle <span class="op">/</span><span class="st"> </span>as_rel_solid_angle)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt;  mean_eff      SEM</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt;  1.133432 1.062946</span></span></code></pre></div>
+<p>This makes sense - the air sample has particles originating outside the source radius, so more of them will be lost, thus an adjustment is needed for the activity measurement.</p>
+<p><strong>scaler_sim</strong></p>
+<p><em>Scaler counts</em>: obtain quick distributions for parameters of interest:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">scaler_sim</span>(<span class="dt">true_bkg =</span> <span class="dv">50</span>, <span class="dt">true_samp =</span> <span class="dv">10</span>, <span class="dt">ct_time =</span> <span class="dv">20</span>, <span class="dt">trials =</span> <span class="fl">1e5</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>rate_meter_sim</strong></p>
+<p><em>Rate meters</em>: In the ratemeter simulation, readings are plotted once per second for a default time of 600 seconds. The meter starts with a reading of zero and builds up based on the time constant. Resolution uncertainty is established to express the uncertainty from reading an analog scale, including the instability of its readings. Many standard references identify the precision or resolution uncertainty of analog readings as half of the smallest increment. This should be considered the single coverage uncertainty for a very stable reading. When a reading is not very stable, evaluation of the reading fluctuation is evaluated in terms of numbers of scale increments covered by meter indication over a reasonable evaluation period. Example with default time constant:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">rate_meter_sim</span>(<span class="dt">cpm_equilibrium =</span> <span class="dv">270</span>, <span class="dt">meter_scale_increments =</span> <span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">20</span>))</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAjVBMVEUAAAAAADoAAGYAAIsAAJ8AALMAAP8AOpAAOscAZrYAZto6AAA6ADo6AIs6AJ86Zto6kNs6kO1mAABmAItmAJ9mttpmtv+QOgCQOouQZgCQ2/+2ZgC2Zou2Zp+2/7a2//++vr7bkDrbkJ/b/9rb///wgID/tmb/trP/25D/28f//7b//9r//9v//+3///8l6BlDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAQPElEQVR4nO2dDWPUuBGGwwXEcZT2gBYouZaGXhM+5///vO7a1sw7I9ljee1dB+a9w9m1JVl6PF92sskVhSZ1dekJ7F0ByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRysDunowuhSgcleCrd2V0uH/lCothyNJ7e7+dTuHV6tO9MSGi4erAJLVdqtMw2IVIDne7Ri2/YuUYIzVJnpiw8XDMQS1kxdMAgPXnAblPbl9EhuqDHvSRE9suHy4qUs9mEl+De6WGBL7mmlKGdtaEz2t4eLhpi914VvQKVsQ2hKynLIgL0DtCpBseZ+e/gggUuEHvHKwtVSzoDQvQO0bUDH9cgfbCMTnfKiPQHXDND4LnfRFOTMgri7+82B0XkDTw9l4kHwPyPaRLcj6Esfvol9/VJsXpL7Jida0IaDROImhZaQxryclXp0ZItVOYOoG3ptHq050UtsBmrASDBT1xpK5qkE+Z7nxGAQHc0PV/PKAquvKx4y9y4XP9U6CZekYzR2sTcjY+uSc9pTN7htQaTD9Vupm/j+RhTk0TQXlcjzZXDqLVYabBDRVCEmhM6RzjkNmgGQxmwGLQfdlQX6mGppJYSerEAMZtmq0fP9BlRikh+VOBc4dAJr3OELoJPEqJgS3pbkxkJ91AuJRZATaB6AplUvu9w6xR/AMWQnsINcINqqYkeE95LudAqpMGkOo1DliOOBeenmq5ViahyuAwPcKyK4EqjaT3xMvLkeefKiIun0cqtZHWEbIUInhjk509oqWa/x5kDgE+w0cJNJv2YhIbjjMDSwMwmfiEC9XQJ6xKZfcESC4sWB7IVkbh5KEGPiePcGVh8ewVANkIrxE8mQGaln3WQGpKjBBiySWgUGDzLqED9+M4TCUceSuPDr7GAPdE6Ba1aYzkHIkuRGVyJEBJV4oCVO8G5EEiJlBIWpc91likGSpYU9eKDTIjBJQwKhDQA8IQbAHj0qmmw72Tes+UxZTpTBcUD4O1xwBwRHVC9CA+UBziFzitrtN8wSOgPmI1BWvAsory0YGpsjNYYeEZBXZAVvruuOR61kA1YYzgQeTFubxnNQlLaG3QKDh/zi8JGgn5+EgDmfLPr5g3ds97kho/QhIyhI2faiAc40DwVqnp7IxM6TckEydtUNARXzIu6XaIaHAtRzHCg3B2pMO4PlMnM5SLrZIYV207u0BgUuoRJt3KABkDaMmArIyNumIz6x0x+Z1bw6ILzJfRlX7Gj8Bs+C3hEhIt1KAJFtKWWQZZUoXB5SjByfqYd7JAMIFgxXpiGNKolR7w3wIa4phMC6G+PQbAfr2ts/mv3zwhzMOUYuW7Bd62cq/JmKRwqRxwxlkBJJ2GwG6vfq9f3GXX0wNJ8VctgS08WH+uEQDlIO39RKqBGm5l4MUT4b81oC+vWUst0//9IbTSUR5DTSqHceACw5SMx5C7hDi5TyyBwPUNoC+vHqTX96NOJkFNJqUBBBpdHxUseEDnKLKMKWgsqmY67RpDFpgQfUsxRhsAM5hlKsZtgMsGdRYYkhYNUs6YHAYFLeLQYMJtcUgQVJEX10hc4Jmi2FbQ+MAsxTAmLAMINViU0AHJ+uz2Ij9mOGSmjA6ElxnjN6CkOwV1y1rrGHYBIBIjvNV2Q5Q23CwCmMTYEGwq+9DkotgQRJhi64qBsk5Mfxgrl8cpL++vu70ZKzGaQWkY2kmhtiMUSAGQp79cJV8RmakMovpM9IJgL6/+3XMb0Q3V1fPumLxzUiDWpCWxESMIJmoa9oxIKhptAVxgM/hWfMWB6PC8xYC+vp6bNGiY+66uXp2jEV+kMZFw9WHckVHJrz0KgMKIYj3kLKsWbFx6THkyzJA39+99Np2af7u0Xual+ZtZaJCBeXMnC1CQULCcmuC9iWw8w5TazEgNFMJaQti0Oe/vnfadoViXyKaQvGneOT6+YUXpBstCCImuFcOmtCC22H6ErPoR+Ooxe+Gs9iqGtxXuTPspWUu9pvbmGMQ1NTjgCR5AygCNjqhJQUI/S+TysUNrJN9R8U8DahI/8sAzQnSLVlM1Se4WgkNEmexUAKQubdOThJ7+LC2HQSRbHCiDYN0y3CmXMZZdoczIEnQytjyADwUCQPCI0SyetIviI/aopI2CtItw8ll58mpwsZmeMlV2S25FVlGyo544dqIJHiZ0nQgt8TFrv1K+jZ71633uAMzL0ZRsvbEqzZpHGHh6rXXqqJKCh942+8jRLgM0BzdHjLYl1fP5gDKdORqK1C5BdaMOnijJDDpRKeqHMh3AELlwK0B9bnr29tDLvMBsVWgFWR7ytmZt8YjDJ/sY8KUIN8bM9QWBaOzyzetGxp2TjZ1Q5afKN48/XMGoGIFECt1CCLKaYzYzAwg8C+V+BUgthQOd8T/VgB0//gYpD8+Hg/VXP3cPBsD9L+j8tfDbPr35mvir6Zd7p/yOEO7kXGTPU9+b8aptmsG9P1dbx5/TNhQxvLl1dg3frQFyXXVRkQJrz8mbaiNSFkABxMC56UyAg2tJL7hziQ7FmSxv/emcz+dxXqK397OeWjP5a8UscrN1IwxVUEWZwfLbaAWIh2DQNgCd8v7JYViv/aPMx4LzRgOWEjigSAgF96YS95JCEjyvRQJutQqZqIHx5HsROeu6P76SOjj9Yw7jjnDmTjMy8gr5X0DDk43GmKO9WbAfghw3tpkGCXxYLQcEBeKJz11NTFIPAZXQ1DvQImDaLgOUNUMcZVD6K1soEY66Z1sQavIPrTP9St6hnKtHC1snCJVEqkaCd0SIZMlJOdHwo3r3vy7GnkVXOvIvlz+U34vuLp9xFshh4vEkGRSlopBAkiaLAF0TPD316fd05tCUdK4XGZxJd6n/K0OqLSqYT8zMkmdMiPSFlSZ6MwV9QXQ19f+c7PKKD/BI9f8wGyyDpo/HOFF5EiMBsIOBZaV3VA8S96ofA9HJA0k7g0ulWsAtrOltxr5gdnH1QBBbpbAC1PmZkkqGlmwHgjWjiMTaToFIOnI+PrtAhfrK6DPL04KQvq8OltBHVMkHNItdbxV6Yf4JQaq3JVbJSTCI5wEqP+2xsS9auNww0R1AQQXukg6JJhsRjIWVANEppe5MHCOxYDWkB0umz6DkRRG2o/y3Gt3DzYHgRVmh7S1oni1qhFPiEHryDwwQ7MgdaGLvCu2NQkIvJC7Sa2Jw/FRGEH6XR7QgGZ4iYUaBGEFIUnpaAO5GAwB5txL5TXukU8oZ8IGFwdk8nMqVybHhx4Yxw0fUzsm3vLLIvJbRzYA9wIoyYaDRf2SakCGD2msJSCJvtzHuNfYRGevaB0VgDBY6D3WJ/K2YltSUclQGIMQmYyGl2J8orNXtI5MDCowyIFRQDXb4i1kxeFQQuR2tGKoykRnr2gV4Wc1CjT9/mFbS/OYqWyfRAJIjCMxMz0cn6U+iR0AmjQgzG9ketSU41elIBq2yV6QidH0RD1tBGjcxEcBjV9t63kVQFJ1wWjoi2MTdbUtINiyMOGMESmdTKV53C//VBBiz6vc9+FEXW1sQVITiiRjT/GpH6sWB3KmpPZXsn8xUVebxqDx+dGUR011Gwv9qQ/JeseeAVEtt8xT6S5+FzIGhIlv14BGg+SEFgGq3qzK7QZOy0zU0TqAfoZn0utIBenaXfZkNufOzXZX+jIEad2s317axXJFbKsTmuV141lsskuxpyC0O0CyzYJ78FE7ma6R5koectdGvjSgPL3CXGDxo7a0EJC910iVx0R8zosDkqdjY4Bq/mfbtKjwpj7xWwPeCyC2kaLylc1oqFlSPhW3afVnKnnojQDN/80LGKVVCw6d1RQnjZrmRRWzq6UIiYob/Zz0/N+8wMsfve/EcL2C6oCKFJq3G/6cdCf/41BwL1TVwjJ7XJWMXn8a1dn0JoAaf/NCftxXHywVz7hOlR5uxIOzz1/egkjXPKVWNiBrQgmM2Jz2+GWrGDT/Ny/496ob8FGEMqLqWTfKYvN/88Lg7OsymFA+U7K77N087aOSXuduYb7YVGypaADxvPYMSOX5dcQD2rKZTKG6NaDZH6ibADQY+ZJqeVRVhx52FB62IaCGD9SNrn+4/VjXBxP8L/sqleK2MajpA3VTzzLS2oCo8iNZI4XWllls/AN18ci104wP1LnDpU1iEFE54OTd8FYxqOkDdVXJ7cfqdaLJYtUHvlt/V6PlA3UjWt1yYNwypRcPW3KbS9dBE9qouq5E/crDKN7uGBBrEx+bPsPmgOb/5gVf60fpWiVdnnNLQC2/ecHT6ndr5c1qZfxtY9CcQvHBaAtAM37zgjfokiMrD9cYdVcuFL1Bf2xAMwpFb9AfHJBfKHqD/uiATh40ADmDBiBn0ADkDBqAnEED0A+nAOQoADkKQI4CkKMA5CgAOQpAjgKQowDkKAA5CkCOApCj9QHdXV09mvdrrLoPNvyu+szrfNP9EGlDp0/Pr45/7aL5RLQBoOMfJrmbde5vbw/Nbo8T5z7zOt91P2Xb0Onu0L77hmfjiY5aG1D/raGbZzOafnp+/A7A7S8fuM+8zl9eHQE1dOpbtJ+o09qAeNVzOxyuI/eZ1/n26T8PgBo6ffrLezO5hlmuDqibzNhHOSq6OUw395nV+dDoGIMaOt398u9XXbBrO1GvtQH1jj3Pvbv2h4lznzmdj95xBNTQ6fb4bc5vb5+1nWjQhQHd5Rg9e97dH2BqBPRosJc9AGpzsf5DMS2W3zVpdLE+1hzizh5crClID59gbImdt8NPr7xp6NSDOEDZQ5BuSKDwnf7G7HvTlub7H9u520eabyjBPj3PHzprrd9uGgvF2wx0B4Vi5wTzQvTgLcfG3Gde5/5Wo6HTXb6naTwRxc2qqwDkKAA5CkCOApCjAOQoADkKQI4CkKMA5CgAOQpAjgKQowDkKAA5CkCOApCjAOQoADkKQI4CkKMA5CgAOQpAjgKQowDkKAA52heg+zf8N6f3ol0B2hucowKQoz0BOv6x6V//e4D0+cU/Xl9fvzy+PxL7eH14Y9pdnwvlngB1FvS1A/T4/QHLkw/dH3f/eHiDf8T884sDnPtzEdopoJeUN2++vj6yuX/CP08IL8+gnQJ6Q7y57/7Ce/cutzonoQcA6LqXuNT3dxGDCguy+qO6dwPtH1A995+tItgZoJcloC6LocV0JlW3qw20K0D0R66DEFBXBx3i8vd3v/WtjlHpXHx2Bmhan/92gZM+JED3L/02q+shAfrXudwK9ZAAXUQByFEAchSAHAUgRwHIUQByFIAcBSBHAchRAHIUgBwFIEcByFEAchSAHAUgRwHIUQByFIAcBSBH/weIqX3qI8kKcAAAAABJRU5ErkJggg==" width="50%" style="display: block; margin: auto;" /></p>
+<p>To estimate <em>time constant</em>, use <code>tau.estimate</code></p>
+</div>
+<div id="stay-time-computation" class="section level3">
+<h3>Stay-time computation</h3>
+<p>Given a dose rate, dose allowed, and a safety margin (default = 20%), calculate stay time with: <code>stay_time</code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">stay_time</span>(<span class="dt">dose_rate =</span> <span class="dv">120</span>, <span class="dt">dose_allowed =</span> <span class="dv">100</span>, <span class="dt">margin =</span>  <span class="dv">20</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; [1] &quot;Time allowed is 40 minutes&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt; [1] 40</span></span></code></pre></div>
+</div>
+<div id="mcnp-tools-functions" class="section level3">
+<h3>mcnp tools functions</h3>
+<p>If you create MCNP inputs, these functions may be helpful:</p>
+<p><strong>mcnp_si_sp_RD</strong> Obtain emission data from the RadData package and write to a file for use with the radiation transport code, MCNP.</p>
+<p><strong>mcnp_si_sp_hist</strong></p>
+<ul>
+<li>Create an <em>energy distribution</em> from histogram data with: <code>mcnp_si_sp_hist</code> Or use <code>mcnp_si_sp_hist_scan</code> to quickly copy and paste data interactively.</li>
+</ul>
+<p><strong>mcnp_matrix_rotations</strong></p>
+<ul>
+<li>Determine the entries needed for MCNP <em>coordinate transformation rotation</em></li>
+</ul>
+<p><strong>mcnp_cone_angle</strong></p>
+<ul>
+<li>Quickly obtain the <em>cone angle</em> entry</li>
+</ul>
+<p><strong>mcnp_plot_out_spec</strong></p>
+<p>For <em>MCNP outputs</em>, plot the results of a tally with <em>energy bins</em>. Either first save your data to a text file, or copy and paste it using <code>mcnp_scan2spec.df</code>. Then plot it using your favorite method, or do a quick plot with <code>mcnp_plot_out_spec</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">mcnp_plot_out_spec</span>(photons_cs137_hist, <span class="st">&#39;example Cs-137 well irradiator&#39;</span>)</span></code></pre></div>
+</div>
+<div id="radionuclides" class="section level3">
+<h3>radionuclides</h3>
+<p>Search by alpha, beta, photon or use the general screen option.</p>
+<p><code>search_phot_by_E</code> allows screening based on energy, half-life, and minimum probability. Also available are <code>search_alpha_by_E</code>, <code>search_beta_by_E</code>, and <code>bin_screen_phot</code>. <code>bin_screen_phot</code> allows limiting searches to radionuclides with emissions in an energy bin of interest with additional filters for not having photons in other specified energy bins. Results for all these search functions may be plotted with <code>RN_plt</code>.</p>
+<p>Here’s a search for photon energy between 0.99 and 1.01 MeV, half-life between 13 and 15 minutes, and probability at least 1e-4</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>search_results &lt;-<span class="st"> </span><span class="kw">search_phot_by_E</span>(<span class="fl">0.99</span>, <span class="fl">1.01</span>, <span class="dv">13</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>, <span class="dv">15</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>, <span class="fl">1e-4</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">RN</th>
+<th align="left">code_AN</th>
+<th align="right">E_MeV</th>
+<th align="right">prob</th>
+<th align="right">half_life</th>
+<th align="left">units</th>
+<th align="right">decay_constant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Pr-136</td>
+<td align="left">G</td>
+<td align="right">0.99100</td>
+<td align="right">0.0016768</td>
+<td align="right">13.10</td>
+<td align="left">m</td>
+<td align="right">0.0008819</td>
+</tr>
+<tr class="even">
+<td align="left">Pr-136</td>
+<td align="left">G</td>
+<td align="right">1.00070</td>
+<td align="right">0.0503040</td>
+<td align="right">13.10</td>
+<td align="left">m</td>
+<td align="right">0.0008819</td>
+</tr>
+<tr class="odd">
+<td align="left">Re-178</td>
+<td align="left">G</td>
+<td align="right">1.00440</td>
+<td align="right">0.0057600</td>
+<td align="right">13.20</td>
+<td align="left">m</td>
+<td align="right">0.0008752</td>
+</tr>
+<tr class="even">
+<td align="left">Pr-147</td>
+<td align="left">G</td>
+<td align="right">0.99597</td>
+<td align="right">0.0083220</td>
+<td align="right">13.40</td>
+<td align="left">m</td>
+<td align="right">0.0008621</td>
+</tr>
+<tr class="odd">
+<td align="left">Xe-138</td>
+<td align="left">G</td>
+<td align="right">0.99680</td>
+<td align="right">0.0006300</td>
+<td align="right">14.08</td>
+<td align="left">m</td>
+<td align="right">0.0008205</td>
+</tr>
+<tr class="even">
+<td align="left">Nb-88</td>
+<td align="left">G</td>
+<td align="right">0.99760</td>
+<td align="right">0.0041000</td>
+<td align="right">14.50</td>
+<td align="left">m</td>
+<td align="right">0.0007967</td>
+</tr>
+<tr class="odd">
+<td align="left">Mo-101</td>
+<td align="left">G</td>
+<td align="right">1.00740</td>
+<td align="right">0.0017300</td>
+<td align="right">14.61</td>
+<td align="left">m</td>
+<td align="right">0.0007907</td>
+</tr>
+<tr class="even">
+<td align="left">Sm-140</td>
+<td align="left">G</td>
+<td align="right">0.99990</td>
+<td align="right">0.0012000</td>
+<td align="right">14.82</td>
+<td align="left">m</td>
+<td align="right">0.0007795</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">RN_plt</span>(spec_<span class="fl">0.1</span>_<span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>The <code>RN_index_screen</code> function helps find a radionuclide of interest based on decay mode, half-life, and total emission energy.</p>
+<p>In this example, we search for radionuclides decaying by spontaneous fission with half-lives between 6 months and 2 years.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>RNs_selected &lt;-<span class="st"> </span><span class="kw">RN_index_screen</span>(<span class="dt">dk_mode =</span> <span class="st">&quot;SF&quot;</span>, <span class="dt">min_half_life_seconds =</span> <span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">3.153e7</span>, <span class="dt">max_half_life_seconds =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">3.153e7</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">RN</th>
+<th align="right">half_life</th>
+<th align="left">units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Es-254</td>
+<td align="right">275.7</td>
+<td align="left">d</td>
+</tr>
+<tr class="even">
+<td align="left">Cf-248</td>
+<td align="right">334.0</td>
+<td align="left">d</td>
+</tr>
+</tbody>
+</table>
+<p>Other radionuclides family functions:</p>
+<ul>
+<li><p>Provide specific activity <strong>RN_Spec_Act</strong></p></li>
+<li><p>Where did this radionuclide decay from? <strong>RN_find_parent</strong></p></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
