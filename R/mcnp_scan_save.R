@@ -2,12 +2,12 @@
 #' @family mcnp tools
 #' @description Provides quick copy-and-paste conversion to data frame.
 #' Paste either a source histogram distribution or tally spectrum from MCNP outputs.
-#' Three-column output tally spectra have columns of maximum energy, bin tally, and
-#' relative Monte Carlo uncertainty for the bin tally value.
-#' Four-column  source histogram distributions have columns of entry number, maximum
+#' Three-column output tally spectra have columns of maximum energy, bin tally, and 
+#' relative Monte Carlo uncertainty for the bin tally value. 
+#' Four-column  source histogram distributions have columns of entry number, maximum 
 #' energy, cumulative probability, and bin probability.
 #' In either case, only the maximum energy and bin probability or result values are used.
-#'
+#' 
 #' @return spectrum file with maximum energy and MCNP bin value
 #' @examples
 #' # Since this function requires the user
@@ -15,7 +15,7 @@
 #' # is set up to provide data for this purpose.
 #' # To run the example, copy and paste the following
 #' # into an input file and delete the hash tags to run.
-#' # my_hist_data <- mcnp_scan2spec()
+#' # my_hist_data <- mcnp_scan_save()
 #' # 0.1000000 3.133122e-05 0.3348260
 #' # 0.4222222 6.731257e-05 0.2017546
 #' # 0.7444444 5.249198e-05 0.4524577
@@ -27,7 +27,7 @@
 #' # 2.6777778 1.468040e-04 0.7248116
 #' # 3.0000000 1.037092e-04 0.7659850
 #' @export
-mcnp_scan2spec <- function() {
+mcnp_scan_save <- function() {
   cat("Use this function to copy, paste and save'\n'")
   cat("four column source histogram distribution '\n'")
   cat("or three column binned-by-energy tally results'\n'")
@@ -42,11 +42,10 @@ mcnp_scan2spec <- function() {
     raw_scan <- scan()
     mtrx <- matrix(raw_scan, ncol = 3, byrow = TRUE)
     spec.df <- data.frame(
-      E.avg = mtrx[, 1] - c(diff(c(0, mtrx[, 1]))) / 2, # average from Emax
-      fraction = mtrx[, 2],
-      unc = mtrx[, 3]
+      E_MeV = mtrx[, 1], 
+      prob = mtrx[, 2]
     )
-  }
+}
   if (cols == 4) {
     cat("copy and paste MCNP source histogram distribution,'\n'")
     cat("with no header'\n'")
@@ -54,9 +53,10 @@ mcnp_scan2spec <- function() {
     raw_scan <- scan()
     mtrx <- matrix(raw_scan, ncol = 4, byrow = TRUE)
     spec.df <- data.frame(
-      E.avg = mtrx[, 2] - c(diff(c(0, mtrx[, 2]))) / 2, # average from Emax
+      E_MeV = mtrx[, 1], 
       prob = mtrx[, 4]
     )
   }
   spec.df
 }
+

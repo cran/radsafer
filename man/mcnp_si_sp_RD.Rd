@@ -8,7 +8,7 @@ mcnp_si_sp_RD(desired_RN, rad_type = NULL, photon = FALSE, cut = 0,
   erg.dist = 1)
 }
 \arguments{
-\item{desired_RN}{Radionuclide in form Ba-137m}
+\item{desired_RN}{Radionuclide in form "Ba-137m"}
 
 \item{rad_type}{Radiation type, leave NULL if selecting photons or
 select from:
@@ -53,14 +53,15 @@ mcnp_si_sp_RD("Am-241", rad_type = "A", cut = 0.01, erg.dist = 23)
 }
 }
 \seealso{
-[si_hist()] and [sp_hist()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
-[RN_screen_plot] may be used for a simple plot of output.
+[mcnp_si_sp_hist()] and [mcnp_si_sp_hist_scan()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
 
 Other mcnp tools: \code{\link{mcnp_cone_angle}},
   \code{\link{mcnp_est_nps}},
   \code{\link{mcnp_matrix_rotations}},
   \code{\link{mcnp_plot_out_spec}},
+  \code{\link{mcnp_scan2plot}},
   \code{\link{mcnp_scan2spec}},
+  \code{\link{mcnp_scan_save}},
   \code{\link{mcnp_si_sp_hist_scan}},
   \code{\link{mcnp_si_sp_hist}}
 }

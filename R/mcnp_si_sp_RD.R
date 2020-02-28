@@ -1,9 +1,10 @@
 #' Produce MCNP source terms from ICRP 107 data except beta
 #' @family mcnp tools
-#' @seealso  [si_hist()] and [sp_hist()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
-#' [RN_screen_plot] may be used for a simple plot of output.
+#' @seealso  [mcnp_si_sp_hist()] and [mcnp_si_sp_hist_scan()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
+#'
 #' @description Obtain emission data from the RadData package and write to a file for use with the radiation transport code, MCNP.
-#' @param desired_RN Radionuclide in form Ba-137m
+#'
+#' @param desired_RN Radionuclide in form "Ba-137m"
 #' @param rad_type Radiation type, leave NULL if selecting photons or
 #' select from:
 #' 'X' for X-Ray
@@ -209,7 +210,7 @@ mcnp_si_sp_RD <- function(desired_RN, rad_type = NULL, photon = FALSE, cut = 0, 
   my_dir <- getwd()
   cat("\n")
   cat(paste0(
-    "The output is appenede to file, si.sp.dat, in your working directory, ",
+    "The output is appeneded to file, si.sp.dat, in your working directory, ",
     my_dir, "."
   ))
   cat("\n")

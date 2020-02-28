@@ -23,6 +23,7 @@ results to a viewable object, such as 'search_results'
 Search for beta emission based on maximum energy and half-life.
 }
 \examples{
+\dontrun{
 # Max beta at least 2 MeV
 search_results <- search_beta_by_E(2)
 # Max beta at least 2 MeV and half-life between 1 s and 1 h
@@ -31,12 +32,19 @@ search_results <- search_beta_by_E(2, 1, 3600)
 # Max beta at least 1 MeV and half-life between 1 d and 2 d
 search_results <- search_beta_by_E(1, 3600 * 24, 2 * 3600 * 24)
 }
+}
 \seealso{
 [RN_plt()]
 
 Other radionuclides: \code{\link{RN_Spec_Act}},
   \code{\link{RN_index_screen}}, \code{\link{RN_info}},
-  \code{\link{RN_plt}}, \code{\link{bin_screen_phot}},
+  \code{\link{RN_plot_search_results}},
+  \code{\link{RN_plot_spectrum}},
+  \code{\link{RN_save_spectrum}},
+  \code{\link{RN_search_alpha_by_E}},
+  \code{\link{RN_search_beta_by_E}},
+  \code{\link{RN_search_phot_by_E}},
+  \code{\link{bin_screen_phot}},
   \code{\link{search_alpha_by_E}},
   \code{\link{search_phot_by_E}}
 }
