@@ -1,7 +1,7 @@
 #' Convert histogram data to average points and plot as spectrum.
 #' @family mcnp tools
 #' 
-#' @seealso  \code{\link{mcnp_scan2spec}} to copy and paste output spectrum.
+#' @seealso  \code{\link{mcnp_scan_save}} to copy and paste output spectrum.
 #' 
 #' @description Model results or input source histograms from MCNP and perhaps 
 #'   other sources typically provide binned tally results with columns representing
@@ -9,8 +9,9 @@
 #'   and an uncertainty column (not used). Once the data is scanned in, or otherwise 
 #'   entered into the R global environment, they can be plotted with this function. 
 #'   
-#' @param spec.df A data frame with no header. Maximum energy in MeV should be
-#'   in the first column, binned results in the second column.
+#' @param spec.df A data frame with no header. Maximum energy in MeV
+#'  should be in the first column, (named E_MeV),  
+#'  and binned results in the second column, (named prob).
 #'   
 #' @param title Title for chart (default = name of spec.df)
 #' @param log_plot 0 = no log axes (default), 1  = log y-axis, 2 = log both axes.
