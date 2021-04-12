@@ -14,22 +14,7 @@
 
 <title>Introduction to radsafer</title>
 
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -41,21 +26,28 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -75,7 +67,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,187 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
-
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -329,7 +141,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(radsafer)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(radsafer)</span></code></pre></div>
 <p>The radsafer package was developed with these goals:</p>
 <ul>
 <li><p>Provide functions that are commonly used in radiation safety</p></li>
@@ -349,33 +161,33 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Radsafer includes several functions to manage radioactive decay corrections:</p>
 <p><strong>dk_correct</strong> provides decay corrected activity or activity-dependent value, such as instrument response rate or dose rate. The computation is made either based on a single radionuclide, or based on user-provided half-life, with time unit. The differential time is either computed based on dates entered or time lapsed based on the time unit.</p>
 <p>Obtain a correction factor for a source to be used today based on a calibration on <code>date1</code>. Allow <code>date2</code> to be the default system date.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">dk_correct</span>(<span class="dt">half_life =</span> <span class="dv">10</span>,</span>
-<span id="cb2-2"><a href="#cb2-2"></a>           <span class="dt">time_unit =</span> <span class="st">&quot;y&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>           <span class="dt">date1 =</span> <span class="st">&quot;2010-01-01&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;  half_life RefValue    RefDate   TargDate  dk_value</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;         10        1 2010-01-01 2021-01-04 0.4662289</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dk_correct</span>(<span class="at">half_life =</span> <span class="dv">10</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">time_unit =</span> <span class="st">&quot;y&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">date1 =</span> <span class="st">&quot;2010-01-01&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  half_life RefValue    RefDate   TargDate  dk_value</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         10        1 2010-01-01 2021-04-12 0.4576418</span></span></code></pre></div>
 <p>Use this function to correct for the value needed on dates it was used. Let the function obtain the half-life from the <code>RadDecay</code> data. In the example, we have a disk source with an original count rate of 10000 cpm:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">dk_correct</span>(<span class="dt">RN_select =</span> <span class="st">&quot;Sr-90&quot;</span>,</span>
-<span id="cb3-2"><a href="#cb3-2"></a>           <span class="dt">date1 =</span> <span class="st">&quot;2005-01-01&quot;</span>,</span>
-<span id="cb3-3"><a href="#cb3-3"></a>           <span class="dt">date2 =</span> <span class="kw">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;2009-10-01&quot;</span>),</span>
-<span id="cb3-4"><a href="#cb3-4"></a>           <span class="dt">A1 =</span> <span class="dv">10000</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;     RN half_life units decay_mode</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  Sr-90     28.79     y         B-</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;     RN RefValue    RefDate   TargDate dk_value</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-01-01 9081.895</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-10-01 8919.954</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dk_correct</span>(<span class="at">RN_select =</span> <span class="st">&quot;Sr-90&quot;</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">date1 =</span> <span class="st">&quot;2005-01-01&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">date2 =</span> <span class="fu">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;2009-10-01&quot;</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">A1 =</span> <span class="dv">10000</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RN half_life units decay_mode</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Sr-90     28.79     y         B-</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RN RefValue    RefDate   TargDate dk_value</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-01-01 9081.895</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Sr-90    10000 2005-01-01 2009-10-01 8919.954</span></span></code></pre></div>
 <p>Reverse decay - find out what readings should have been in the past given today’s reading of 3000</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">dk_correct</span>(<span class="dt">RN_select =</span> <span class="st">&quot;Cs-137&quot;</span>, </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">date1 =</span> <span class="st">&quot;2019-01-01&quot;</span>, </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="dt">date2 =</span> <span class="kw">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;1999-01-01&quot;</span>), </span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="dt">A1 =</span> <span class="dv">3000</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;      RN half_life units decay_mode</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;  Cs-137   30.1671     y         B-</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; </span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;      RN RefValue    RefDate   TargDate dk_value</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 2009-01-01 3774.795</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 1999-01-01 4749.991</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dk_correct</span>(<span class="at">RN_select =</span> <span class="st">&quot;Cs-137&quot;</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date1 =</span> <span class="st">&quot;2019-01-01&quot;</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">date2 =</span> <span class="fu">c</span>(<span class="st">&quot;2009-01-01&quot;</span>,<span class="st">&quot;1999-01-01&quot;</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A1 =</span> <span class="dv">3000</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      RN half_life units decay_mode</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Cs-137   30.1671     y         B-</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      RN RefValue    RefDate   TargDate dk_value</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 2009-01-01 3774.795</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Cs-137     3000 2019-01-01 1999-01-01 4749.991</span></span></code></pre></div>
 <p>Other decay functions answer the following questions:</p>
 <ul>
 <li><p>How long does it take to decay something with a given activity, or how old is a sample if it has decayed from? <strong>dk_time</strong></p></li>
@@ -388,7 +200,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Search by alpha, beta, photon or use the general screen option.</p>
 <p><code>RN_search_phot_by_E</code> allows screening based on energy, half-life, and minimum probability. Also available are <code>RN_search_alpha_by_E</code>, <code>RN_search_beta_by_E</code>, and <code>bin_screen_phot</code>. <code>RN_bin_screen_phot</code> allows limiting searches to radionuclides with emissions in an energy bin of interest with additional filters for not having photons in other specified energy bins. Results for all these search functions may be plotted with <code>RN_plot_spectrum</code>.</p>
 <p>Here’s a search for photon energy between 0.99 and 1.01 MeV, half-life between 13 and 15 minutes, and probability at least 1e-3</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>search_results &lt;-<span class="st"> </span><span class="kw">RN_search_phot_by_E</span>(<span class="fl">0.99</span>, <span class="fl">1.01</span>, <span class="dv">13</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>, <span class="dv">15</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>, <span class="fl">1e-3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>search_results <span class="ot">&lt;-</span> <span class="fu">RN_search_phot_by_E</span>(<span class="fl">0.99</span>, <span class="fl">1.01</span>, <span class="dv">13</span> <span class="sc">*</span> <span class="dv">60</span>, <span class="dv">15</span> <span class="sc">*</span> <span class="dv">60</span>, <span class="fl">1e-3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -467,16 +279,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">RN_plot_spectrum</span>(search_results)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; [1] &quot;No matches&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RN_plot_spectrum</span>(search_results)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No matches&quot;</span></span></code></pre></div>
 <p>You can also plot a spectrum in one step, skipping the data save:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a> <span class="kw">RN_plot_spectrum</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a>   <span class="dt">desired_RN =</span> <span class="kw">c</span>(<span class="st">&quot;Pu-238&quot;</span>, <span class="st">&quot;Pu-239&quot;</span>, <span class="st">&quot;Am-241&quot;</span>), <span class="dt">rad_type =</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>   <span class="dt">photon =</span> <span class="ot">FALSE</span>, <span class="dt">prob_cut =</span> <span class="fl">0.01</span>, <span class="dt">log_plot =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">RN_plot_spectrum</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">desired_RN =</span> <span class="fu">c</span>(<span class="st">&quot;Pu-238&quot;</span>, <span class="st">&quot;Pu-239&quot;</span>, <span class="st">&quot;Am-241&quot;</span>), <span class="at">rad_type =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">photon =</span> <span class="cn">FALSE</span>, <span class="at">prob_cut =</span> <span class="fl">0.01</span>, <span class="at">log_plot =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>The <code>RN_index_screen</code> function helps find a radionuclide of interest based on decay mode, half-life, and total emission energy.</p>
 <p>In this example, we search for radionuclides decaying by spontaneous fission with half-lives between 6 months and 2 years.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>RNs_selected &lt;-<span class="st"> </span><span class="kw">RN_index_screen</span>(<span class="dt">dk_mode =</span> <span class="st">&quot;SF&quot;</span>, <span class="dt">min_half_life_seconds =</span> <span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">3.153e7</span>, <span class="dt">max_half_life_seconds =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">3.153e7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>RNs_selected <span class="ot">&lt;-</span> <span class="fu">RN_index_screen</span>(<span class="at">dk_mode =</span> <span class="st">&quot;SF&quot;</span>, <span class="at">min_half_life_seconds =</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fl">3.153e7</span>, <span class="at">max_half_life_seconds =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fl">3.153e7</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -503,66 +315,66 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><p>Provide specific activity <strong>RN_Spec_Act</strong></p></li>
 <li><p>Where did this radionuclide decay from? <strong>RN_find_parent</strong></p></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">RN_find_parent</span>(<span class="st">&quot;Th-230&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;       RN</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; 1 Ac-230</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; 2 Pa-230</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 3  U-234</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RN_find_parent</span>(<span class="st">&quot;Th-230&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       RN</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Ac-230</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Pa-230</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  U-234</span></span></code></pre></div>
 </div>
 <div id="rad-measurements-functions" class="section level3">
 <h3>rad measurements functions</h3>
 <p><strong>air_dens_cf</strong> Correct <em>vented ion chamber readings</em> based on difference in air pressure (readings in degrees Celsius and mm Hg):</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">air_dens_cf</span>(<span class="dt">T.actual =</span> <span class="dv">30</span>, <span class="dt">P.actual =</span> <span class="dv">760</span>, <span class="dt">T.ref =</span> <span class="dv">20</span>, <span class="dt">P.ref =</span> <span class="dv">760</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; [1] 1.034112</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">air_dens_cf</span>(<span class="at">T.actual =</span> <span class="dv">30</span>, <span class="at">P.actual =</span> <span class="dv">760</span>, <span class="at">T.ref =</span> <span class="dv">20</span>, <span class="at">P.ref =</span> <span class="dv">760</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1.034112</span></span></code></pre></div>
 <p>Let’s try it out combined with the instrument reading:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>rdg &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>(rdg_corrected &lt;-<span class="st"> </span>rdg <span class="op">*</span><span class="st"> </span><span class="kw">air_dens_cf</span>(<span class="dt">T.actual =</span> <span class="dv">30</span>, <span class="dt">P.actual =</span> <span class="dv">760</span>, <span class="dt">T.ref =</span> <span class="dv">20</span>, <span class="dt">P.ref =</span> <span class="dv">760</span>))</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; [1] 103.4112</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rdg <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(rdg_corrected <span class="ot">&lt;-</span> rdg <span class="sc">*</span> <span class="fu">air_dens_cf</span>(<span class="at">T.actual =</span> <span class="dv">30</span>, <span class="at">P.actual =</span> <span class="dv">760</span>, <span class="at">T.ref =</span> <span class="dv">20</span>, <span class="at">P.ref =</span> <span class="dv">760</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 103.4112</span></span></code></pre></div>
 <p><strong>neutron_geom_cf</strong></p>
 <p>Correct for <em>geometry</em> when reading a close <em>neutron</em> source. Example: neutron rem detector with a radius of 11 cm and source near surface:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">neutron_geom_cf</span>(<span class="fl">11.1</span>, <span class="dv">11</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; [1] 0.7236467</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">neutron_geom_cf</span>(<span class="fl">11.1</span>, <span class="dv">11</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.7236467</span></span></code></pre></div>
 <p><strong>disk_to_disk_solid_angle</strong></p>
 <p>Correct for a mismatch between the <em>source calibration</em> of a <em>counting system</em> and the item being measured. A significant factor in the counting efficiency is the solid angle from the source to the detector. You can also check for the impact of an item not being centered with the detector.</p>
 <p>Example: You are counting an air sample with an active collection diameter of 45 mm, your detector has a radius of 25 mm and there is a gap between the two of 5 mm. (The function is based on radius, not diameter so be sure to divide the diameter by two.) The relative solid angle is:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>(as_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">45</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;n&quot;</span>)))</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; [1] 0.050025088 0.002183902</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(as_rel_solid_angle <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">disk_to_disk_solid_angle</span>(<span class="at">r.source =</span> <span class="dv">45</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">gap =</span> <span class="dv">20</span>, <span class="at">r.detector =</span> <span class="fl">12.5</span>, <span class="at">runs =</span> <span class="fl">1e4</span>, <span class="at">plot.opt =</span> <span class="st">&quot;n&quot;</span>)))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.04831014 0.00213791</span></span></code></pre></div>
 <p>An optional plot is available in 2D or 3D:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>  <span class="kw">library</span>(ggplot2)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">theme_update</span>(<span class="co"># axis labels</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>             <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
-<span id="cb14-4"><a href="#cb14-4"></a>             <span class="co"># tick labels</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>             <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>),</span>
-<span id="cb14-6"><a href="#cb14-6"></a>             <span class="co"># title </span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>             <span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">5</span>))</span>
-<span id="cb14-8"><a href="#cb14-8"></a>(as_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">45</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;3d&quot;</span>)))</span></code></pre></div>
-<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
-<pre><code>#&gt; [1] 0.046261404 0.002091844</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_update</span>(<span class="co"># axis labels</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># tick labels</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># title </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>(as_rel_solid_angle <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">disk_to_disk_solid_angle</span>(<span class="at">r.source =</span> <span class="dv">45</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">gap =</span> <span class="dv">20</span>, <span class="at">r.detector =</span> <span class="fl">12.5</span>, <span class="at">runs =</span> <span class="fl">1e4</span>, <span class="at">plot.opt =</span> <span class="st">&quot;3d&quot;</span>)))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; [1] 0.048974256 0.002164319</code></pre>
 <p>Continuing the example: the only calibration source you had available with the appropriate isotope has an active diameter of 20 mm. Is this a big deal? Let’s estimate the relative solid angle of the calibration, then take a ratio of the two.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>(cal_rel_solid_angle &lt;-<span class="st"> </span><span class="kw">disk_to_disk_solid_angle</span>(<span class="dt">r.source =</span> <span class="dv">20</span>, <span class="dt">gap =</span> <span class="dv">20</span>, <span class="dt">r.detector =</span> <span class="fl">12.5</span>, <span class="dt">runs =</span> <span class="fl">1e4</span>, <span class="dt">plot.opt =</span> <span class="st">&quot;n&quot;</span>))</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#&gt;    mean_eff        SEM</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="co">#&gt;  0.04917056 0.00215514</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(cal_rel_solid_angle <span class="ot">&lt;-</span> <span class="fu">disk_to_disk_solid_angle</span>(<span class="at">r.source =</span> <span class="dv">20</span>, <span class="at">gap =</span> <span class="dv">20</span>, <span class="at">r.detector =</span> <span class="fl">12.5</span>, <span class="at">runs =</span> <span class="fl">1e4</span>, <span class="at">plot.opt =</span> <span class="st">&quot;n&quot;</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    mean_eff         SEM</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.05030595 0.002189261</span></span></code></pre></div>
 <p>Correct for the mismatch:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>(cf &lt;-<span class="st"> </span>cal_rel_solid_angle <span class="op">/</span><span class="st"> </span>as_rel_solid_angle)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt;  mean_eff      SEM</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;  1.062885 1.030259</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(cf <span class="ot">&lt;-</span> cal_rel_solid_angle <span class="sc">/</span> as_rel_solid_angle)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  mean_eff      SEM</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1.027192 1.011524</span></span></code></pre></div>
 <p>This makes sense - the air sample has particles originating outside the source radius, so more of them will be lost, thus an adjustment is needed for the activity measurement.</p>
 <p><strong>scaler_sim</strong></p>
 <p><em>Scaler counts</em>: obtain quick distributions for parameters of interest:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">scaler_sim</span>(<span class="dt">true_bkg =</span> <span class="dv">50</span>, <span class="dt">true_samp =</span> <span class="dv">10</span>, <span class="dt">ct_time =</span> <span class="dv">20</span>, <span class="dt">trials =</span> <span class="fl">1e5</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scaler_sim</span>(<span class="at">true_bkg =</span> <span class="dv">50</span>, <span class="at">true_samp =</span> <span class="dv">10</span>, <span class="at">ct_time =</span> <span class="dv">20</span>, <span class="at">trials =</span> <span class="fl">1e5</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>rate_meter_sim</strong></p>
 <p><em>Rate meters</em>: In the ratemeter simulation, readings are plotted once per second for a default time of 600 seconds. The meter starts with a reading of zero and builds up based on the time constant. Resolution uncertainty is established to express the uncertainty from reading an analog scale, including the instability of its readings. Many standard references identify the precision or resolution uncertainty of analog readings as half of the smallest increment. This should be considered the single coverage uncertainty for a very stable reading. When a reading is not very stable, evaluation of the reading fluctuation is evaluated in terms of numbers of scale increments covered by meter indication over a reasonable evaluation period. Example with default time constant:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">rate_meter_sim</span>(<span class="dt">cpm_equilibrium =</span> <span class="dv">270</span>, <span class="dt">meter_scale_increments =</span> <span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">20</span>))</span></code></pre></div>
-<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rate_meter_sim</span>(<span class="at">cpm_equilibrium =</span> <span class="dv">270</span>, <span class="at">meter_scale_increments =</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">20</span>))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="50%" style="display: block; margin: auto;" /></p>
 <p>To estimate <em>time constant</em>, use <code>tau.estimate</code></p>
 </div>
 <div id="stay-time-computation" class="section level3">
 <h3>Stay-time computation</h3>
 <p>Given a dose rate, dose allowed, and a safety margin (default = 20%), calculate stay time with: <code>stay_time</code></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">stay_time</span>(<span class="dt">dose_rate =</span> <span class="dv">120</span>, <span class="dt">dose_allowed =</span> <span class="dv">100</span>, <span class="dt">margin =</span>  <span class="dv">20</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt; [1] &quot;Time allowed is 40 minutes&quot;</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; [1] 40</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stay_time</span>(<span class="at">dose_rate =</span> <span class="dv">120</span>, <span class="at">dose_allowed =</span> <span class="dv">100</span>, <span class="at">margin =</span>  <span class="dv">20</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Time allowed is 40 minutes&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 40</span></span></code></pre></div>
 </div>
 <div id="mcnp-tools-functions" class="section level3">
 <h3>mcnp tools functions</h3>
@@ -583,7 +395,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p><strong>mcnp_plot_out_spec</strong></p>
 <p>For <em>MCNP outputs</em>, plot the results of a tally with <em>energy bins</em>. The fastest way to do this is with <code>mcnp_scan2plot</code>.</p>
 <p>Alternatively, if you want to get your data into R, first save it in a text file and import it to R. (Base R provides methods with <code>read.table</code> or you might prefer options from the <code>readr</code> or <code>readxl</code> packages.) Or you can copy and paste your data using <code>mcnp_scan_save</code>. You can then plot with <code>mcnp_plot_out_spec</code> (below) or design your own plot.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">mcnp_plot_out_spec</span>(photons_cs137_hist, <span class="st">&#39;example Cs-137 well irradiator&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnp_plot_out_spec</span>(photons_cs137_hist, <span class="st">&#39;example Cs-137 well irradiator&#39;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" width="75%" style="display: block; margin: auto;" /></p>
 </div>
 
