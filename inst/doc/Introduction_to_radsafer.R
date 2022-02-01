@@ -45,7 +45,9 @@ RNs_selected <- RN_index_screen(dk_mode = "SF", min_half_life_seconds = 0.5 * 3.
 knitr::kable(RNs_selected[, c(1:3)])
 
 ## ----echo = TRUE--------------------------------------------------------------
+
 RN_find_parent("Th-230")
+
 
 ## -----------------------------------------------------------------------------
 air_dens_cf(T.actual = 30, P.actual = 760, T.ref = 20, P.ref = 760)
