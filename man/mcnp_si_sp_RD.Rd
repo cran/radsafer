@@ -54,7 +54,13 @@ This is followed by the emission probability of each si entry.
 An additional text entry is made summing up the probabilities.
 }
 \description{
-Obtain emission data from the RadData package and write to a file for use with the radiation transport code, MCNP.
+#' \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}:
+This function is deprecated
+and will be removed in a future package revision.
+For now, it is still usable.
+The replacement, \code{mcnp_sdef_erg_line} is the same function,
+renamed to be consistent with the name of function
+\code{mcnp_sdef_erg_hist}.
 }
 \examples{
 \dontrun{
@@ -64,7 +70,7 @@ mcnp_si_sp_RD("Am-241", rad_type = "A", cut = 0.01, erg.dist = 23)
 }
 }
 \seealso{
-[mcnp_si_sp_hist()] and [mcnp_si_sp_hist_scan()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
+\code{\link[=mcnp_sdef_erg_hist]{mcnp_sdef_erg_hist()}} if radioactive emission data is available in histogram form and needs formatting for MCNP input.
 
 Other mcnp tools: 
 \code{\link{mcnp_cone_angle}()},
@@ -73,6 +79,8 @@ Other mcnp tools:
 \code{\link{mcnp_plot_out_spec}()},
 \code{\link{mcnp_scan2plot}()},
 \code{\link{mcnp_scan_save}()},
+\code{\link{mcnp_sdef_erg_hist}()},
+\code{\link{mcnp_sdef_erg_line}()},
 \code{\link{mcnp_si_sp_hist_scan}()},
 \code{\link{mcnp_si_sp_hist}()}
 }

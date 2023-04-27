@@ -1,8 +1,15 @@
 #' Produce MCNP source terms from ICRP 107 data except beta
 #' @family mcnp tools
-#' @seealso  [mcnp_si_sp_hist()] and [mcnp_si_sp_hist_scan()]  if radioactive emission data is available in histogram form and needs formatting for MCNP input.
+#' @seealso  [mcnp_sdef_erg_hist()] if radioactive emission data is available in histogram form and needs formatting for MCNP input.
 #'
-#' @description Obtain emission data from the RadData package and write to a file for use with the radiation transport code, MCNP.
+#' @description 
+#' #' `r lifecycle::badge("deprecated")`:
+#' This function is deprecated 
+#' and will be removed in a future package revision. 
+#' For now, it is still usable. 
+#' The replacement, `mcnp_sdef_erg_line` is the same function,
+#' renamed to be consistent with the name of function 
+#' `mcnp_sdef_erg_hist`.
 #'
 #' @param desired_RN Radionuclide in form "Ba-137m"
 #' @param rad_type Radiation type, leave NULL if selecting photons or
