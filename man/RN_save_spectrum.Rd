@@ -11,24 +11,42 @@ RN_save_spectrum(desired_RN, rad_type = NULL, photon = FALSE, prob_cut = 0)
 
 \item{rad_type}{Radiation type, leave NULL if selecting photons or
 select from:
+
 'X' for X-Ray
+
 'G' for Gamma
+
 'AE' for Auger Electron
+
 'IE' for Internal Conversion Electron
+
 'A' for Alpha
+
 'AR' for Alpha Recoil
+
 'B-' for Beta Negative
+
 'AQ' for Annihilation Quanta
+
 'B+' for Beta Positive
+
 'PG' for Prompt Gamma
+
 'DG' for Delayed Gamma
+
 'DB' for Delayed Beta
+
 'FF' for Fission Fragment
+
 'N' for Neutron}
 
-\item{photon}{'Y' to select all rad_types that are photons}
+\item{photon}{Use only if you do not specify \code{rad_type}.
+TRUE will select all rad_types that are photons.
+Note that if you select \code{rad_type = "G"}, for example, you
+will not get X-rays or Annihilation Quanta (the 0.511 MeV
+photon from pair annihilation).}
 
-\item{prob_cut}{minimum probability defaults to 0}
+\item{prob_cut}{minimum probability defaults to 0.01}
 }
 \value{
 Dataframe with energy spectra - including probability of emission quantum, or, for
